@@ -89,7 +89,7 @@ const Profile = () => {
                  showToast('error',data.message)
               }
               
-                dispath(setUser(data))
+                dispath(setUser(data.user))
                 showToast('success',data.message)
             } catch (error) {
               showToast('error',error.message)
