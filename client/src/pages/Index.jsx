@@ -9,8 +9,7 @@ const Index = () => {
     <div>
       <Hero />
       <Features />
-      <FeaturedInterviews />
-      <FeaturedOpportunities />
+    
       <CallToAction />
     </div>
   );
