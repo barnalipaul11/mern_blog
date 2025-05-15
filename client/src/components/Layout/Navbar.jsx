@@ -13,7 +13,7 @@ import { removeUser, setUser } from '@/redux/user/user.slice';
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
-  { to: '/blogs', label: 'Interview Experiences', icon: BookOpen },
+  { to: '/internship', label: 'Interview Experiences', icon: BookOpen },
   { to: '/opportunities', label: 'Opportunities', icon: Briefcase },
   { to: '/blog/add', label: 'Share Your Story', icon: PenSquare },
   { to: '/blog', label: 'Dashboard', icon: User },

@@ -42,3 +42,15 @@ export const createInterview = async (req, res) => {
     return res.status(500).json({ message: error.message }); // Return the message for easier debugging
   }
 };
+
+
+
+export const showAllInterview = async (req, res) => {
+  try {
+    const interviews = await Interview.find().populate("author", "name email"); // only populate what is valid
+    res.status(200).json(interviews);
+  } catch (error) {
+    console.error("Error fetching interviews:", error.message);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+};
