@@ -163,7 +163,7 @@ const SearchAndFilter = ({ type, onFilterChange, onSearchChange }) => {
                 <SheetTitle>Filter Options</SheetTitle>
               </SheetHeader>
 
-              <div className="py-6 space-y-6">
+              <div className="py-6 space-y-6 px-4">
                 {/* Company Filter */}
                 <div className="space-y-2">
                   <Label>Company</Label>

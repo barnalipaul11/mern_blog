@@ -6,6 +6,7 @@ const Opportunities = () => {
   const [opportunities, setOpportunities] = useState([]);
   const [filteredOpportunities, setFilteredOpportunities] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_BASE_URL}/opportunity/`, {
@@ -47,13 +48,14 @@ const Opportunities = () => {
     setFilteredOpportunities(results);
   };
 
-  const handleFilterChange = (filters) => {
-    filterAndSearch(filters, searchQuery);
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+    filterAndSearch(newFilters, searchQuery);
   };
 
   const handleSearchChange = (query) => {
     setSearchQuery(query);
-    filterAndSearch({}, query); // Use previous filters if needed
+    filterAndSearch(filters, query);
   };
 
   return (
