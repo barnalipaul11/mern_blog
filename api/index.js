@@ -5,6 +5,8 @@ import cors from 'cors'
 import mongoose from 'mongoose';
 import AuthRoute from './routes/Auth.route.js';
 import UserRoute from './routes/User.route.js';
+import InterviewRoute from './routes/Interview.route.js';
+import OpportunityRoute from './routes/OpportunityRoute.js';
 
 dotenv.config()
 
@@ -28,6 +30,8 @@ mongoose.connect(process.env.MONGODB_CONN,{dbName:'mern-blog'})
 
 app.use('/api/auth',AuthRoute)
 app.use('/api/user',UserRoute)
+app.use('/api/interviews',InterviewRoute)
+app.use('/api/opportunity', OpportunityRoute)
     
 app.listen(PORT,()=>{
     console.log('Server running on port:',PORT)
