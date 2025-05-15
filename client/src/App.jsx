@@ -13,6 +13,7 @@ import BlogDetails from "./pages/BlogDetails";
 import EditBlog from './pages/EditBlog'
 import Opportunities from "./pages/Opportunities";
 import Interviews from "./pages/Interview";
+import InterviewDetails from "./pages/InterviewDetails";
 
 const App = () => (
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -27,7 +28,7 @@ const App = () => (
           <Route path={RouteBlogEdit()} element={<EditBlog/>} />
           <Route path={RouteOpportunity} element={<Opportunities/>} />
           <Route path={RouteInternship} element={<Interviews/>} />
-       
+           <Route path="/interviews/:id" element={<InterviewDetails />} />
 
         </Route>
 

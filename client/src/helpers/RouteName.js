@@ -16,5 +16,5 @@ export const RouteBlogEdit=(blogid)=>{
 
 //Opportunity page show
 export const RouteOpportunity = '/opportunities'
-export const RouteInternship = '/internship'
+export const RouteInternship = '/interview'
 

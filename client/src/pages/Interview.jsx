@@ -92,7 +92,7 @@ const Interviews = () => {
       {filteredInterviews.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredInterviews.map(interview => (
-            <InterviewCard key={interview.id} interview={interview} />
+            <InterviewCard key={interview._id} interview={interview} />
           ))}
         </div>
       ) : (

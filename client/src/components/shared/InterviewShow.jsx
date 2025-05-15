@@ -20,7 +20,7 @@ const getDifficultyColor = level => {
 
 const InterviewShow = ({ interview }) => {
   const {
-    id,
+    _id,
     companyId,
     roleId,
     interviewDate,
@@ -48,8 +48,9 @@ const InterviewShow = ({ interview }) => {
   }
 
   return (
-    <Link to={`/interviews/${id}`}>
-      <Card className="card-glow h-full flex flex-col hover:shadow-md transition-shadow duration-300">
+    <Link to={`/interviews/${_id}`}>
+     <Card className="relative bg-black text-white card-glow h-full flex flex-col transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/10 hover:bg-gradient-to-br hover:from-black hover:to-[#0f0f0f]">
+
         <CardHeader className="pb-3 pt-0">
           <div className="flex justify-between items-start">
             <div>
@@ -119,3 +120,5 @@ const InterviewShow = ({ interview }) => {
 }
 
 export default InterviewShow
+
+

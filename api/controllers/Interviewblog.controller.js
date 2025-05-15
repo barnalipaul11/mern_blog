@@ -45,7 +45,7 @@ export const createInterview = async (req, res) => {
 
 
 
-export const showAllInterview = async (req, res) => {
+ export const showAllInterview = async (req, res) => {
   try {
     const interviews = await Interview.find().populate("author", "name email"); // only populate what is valid
     res.status(200).json(interviews);
@@ -54,3 +54,19 @@ export const showAllInterview = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+export const getInterviewById = async (req, res) => {
+  try {
+    const interview = await Interview.findById(req.params.id);
+
+    if (!interview) {
+      return res.status(404).json({ message: "Interview not found" });
+    }
+
+    res.json(interview);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
