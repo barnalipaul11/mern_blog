@@ -7,6 +7,7 @@ import AuthRoute from './routes/Auth.route.js';
 import UserRoute from './routes/User.route.js';
 import InterviewRoute from './routes/Interview.route.js';
 import OpportunityRoute from './routes/OpportunityRoute.js';
+import LikeRoute from './routes/LikeRoute.js';
 
 dotenv.config()
 
@@ -32,6 +33,8 @@ app.use('/api/auth',AuthRoute)
 app.use('/api/user',UserRoute)
 app.use('/api/interviews',InterviewRoute)
 app.use('/api/opportunity', OpportunityRoute)
+app.use('/api/interview-like',LikeRoute)
+
     
 app.listen(PORT,()=>{
     console.log('Server running on port:',PORT)

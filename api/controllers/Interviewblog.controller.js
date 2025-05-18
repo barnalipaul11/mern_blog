@@ -57,7 +57,7 @@ export const createInterview = async (req, res) => {
 
 export const getInterviewById = async (req, res) => {
   try {
-    const interview = await Interview.findById(req.params.id);
+    const interview = await Interview.findById(req.params.id).populate("author", "name email");
 
     if (!interview) {
       return res.status(404).json({ message: "Interview not found" });
@@ -70,3 +70,14 @@ export const getInterviewById = async (req, res) => {
   }
 };
 
+// controllers/interviewController.js
+export const deleteInterview = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleted = await Interview.findByIdAndDelete(id);
+    if (!deleted) return res.status(404).json({ message: "Not found" });
+    res.status(200).json({ message: "Deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};

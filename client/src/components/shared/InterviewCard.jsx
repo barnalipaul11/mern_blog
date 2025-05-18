@@ -11,9 +11,23 @@ import {
   AvatarFallback,
 } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { Calendar, Star, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
+
+// Optional mappings for better display names
+const companies = {
+  google: "Google",
+  amazon: "Amazon",
+  // add other company mappings here
+};
+
+const roles = {
+  "software-engineer": "Software Engineer",
+  "data-scientist": "Data Scientist",
+  // add other role mappings here
+};
 
 const getDifficultyColor = (level) => {
   switch (level) {
@@ -29,30 +43,35 @@ const getDifficultyColor = (level) => {
 };
 
 const InterviewCard = ({ interview, onEdit, onDelete }) => {
+  // Using _id as id, and destructure other fields
   const {
-    id,
-    company,
-    role,
-    date,
+    _id: id,
+    companyId,
+    roleId,
+    interviewDate,
     difficultyLevel,
-    tags,
+    tags = [],
     author,
     title,
   } = interview;
 
-  const difficultyColor = getDifficultyColor(difficultyLevel);
-  const formattedDate = format(new Date(date), "MMM dd, yyyy");
+  const formattedDate = isValid(new Date(interviewDate))
+    ? format(new Date(interviewDate), "MMM dd, yyyy")
+    : "Unknown Date";
+
   const navigate = useNavigate();
 
   const getInitials = (name) =>
     name
-      .split(" ")
+      ?.split(" ")
       .map((part) => part.charAt(0))
       .join("")
       .toUpperCase();
 
+  const difficultyColor = getDifficultyColor(difficultyLevel);
+
   return (
-    <Card className="h-full flex flex-col border hover:shadow-xl hover:border-primary/40 transition-all duration-200">
+    <Card className="relative bg-black text-white card-glow h-full flex flex-col transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-amber-500/10 hover:bg-gradient-to-br hover:from-black hover:to-[#0f0f0f]">
       <CardHeader className="pb-2 pt-3 px-4">
         <div className="flex justify-between items-start">
           <div>
@@ -60,26 +79,27 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
               variant="outline"
               className="mb-2 border-primary/40 bg-primary/5"
             >
-              {company.name}
+              {companies[companyId] ?? companyId ?? "Unknown Company"}
             </Badge>
             <h3
               onClick={() => navigate(`/interviews/${id}`)}
               className="text-lg font-semibold leading-tight hover:text-primary transition-colors duration-200 cursor-pointer"
             >
-              {title}
+              {title ?? "Untitled Interview"}
             </h3>
           </div>
           <Badge variant="outline" className={`${difficultyColor}`}>
-            {difficultyLevel.charAt(0).toUpperCase() +
-              difficultyLevel.slice(1)}
+            {difficultyLevel
+              ? difficultyLevel.charAt(0).toUpperCase() + difficultyLevel.slice(1)
+              : "Unknown"}
           </Badge>
         </div>
       </CardHeader>
 
-      <CardContent className="pb-0 px-2 ">
+      <CardContent className="pb-0 px-2">
         <div className="flex items-center text-sm text-muted-foreground mb-2">
           <Star className="h-4 w-4 mr-1" />
-          <span>{role.name}</span>
+          <span>{roles[roleId] ?? roleId ?? "Unknown Role"}</span>
         </div>
         <div className="flex items-center text-sm text-muted-foreground">
           <Calendar className="h-4 w-4 mr-1" />
@@ -90,22 +110,32 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
       <CardFooter className="mt-auto pt-3 px-4 pb-3 flex items-center justify-between border-t border-border">
         <div className="flex items-center gap-2">
           <Avatar className="h-6 w-6">
-            {author.avatar ? (
-              <AvatarImage src={author.avatar} alt={author.name} />
+            {author?.avatar ? (
+              <AvatarImage src={author.avatar} alt={author?.name ?? "User"} />
             ) : (
-              <AvatarFallback>{getInitials(author.name)}</AvatarFallback>
+              <AvatarFallback>{getInitials(author?.name ?? "U")}</AvatarFallback>
             )}
           </Avatar>
-          <span className="text-sm text-muted-foreground">{author.name}</span>
+          <span className="text-sm text-muted-foreground">
+            {author?.name ?? "Unknown Author"}
+          </span>
         </div>
 
         <div className="flex gap-2 items-center">
           <div className="flex flex-wrap gap-1 mr-2">
-            {tags.slice(0, 2).map((tag) => (
-              <Badge key={tag.id} variant="secondary" className="text-xs px-1.5">
-                {tag.name}
-              </Badge>
-            ))}
+            {tags.length > 0 ? (
+              tags.slice(0, 2).map((tag, idx) => (
+                <Badge
+                  key={idx}
+                  variant="secondary"
+                  className="text-xs px-1.5"
+                >
+                  {tag}
+                </Badge>
+              ))
+            ) : (
+              <span className="text-xs text-muted-foreground">No tags</span>
+            )}
             {tags.length > 2 && (
               <Badge variant="secondary" className="text-xs px-1.5">
                 +{tags.length - 2}
@@ -125,7 +155,7 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
             size="icon"
             variant="ghost"
             className="h-7 w-7"
-            onClick={() => onDelete?.(id)}
+            onClick={() => onDelete(interview._id)}
           >
             <Trash2 size={14} className="text-red-500" />
           </Button>

@@ -90,7 +90,7 @@ const Profile = () => {
               }
               
                 dispath(setUser(data.user))
-                showToast('success',data.message)
+                showToast('success',"User data updated successfully")
             } catch (error) {
               showToast('error',error.message)
             }

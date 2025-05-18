@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { ArrowLeft } from "lucide-react"
+import LikeCount from "@/components/LikeCount"
 
 export default function InterviewDetails() {
   const { id } = useParams()
@@ -98,9 +99,9 @@ export default function InterviewDetails() {
     month: "short",
     day: "numeric"
   }) : "Unknown";
-
+  
   return (
-    <div className="animate-fade-in max-w-4xl mx-auto">
+    <div className="animate-fade-in max-w-6xl mx-auto">
       <div className="mb-6">
         <Button variant="ghost" asChild className="group">
           <Link to="/interview" className="flex items-center">
@@ -123,11 +124,12 @@ export default function InterviewDetails() {
                 {interview.difficultyLevel}
               </Badge>
             )}
-            {formattedInterviewDate && (
+            {/* {formattedInterviewDate && (
               <span className="text-sm text-muted-foreground">
                 {formattedInterviewDate}
               </span>
-            )}
+            )} */}
+                <LikeCount interviewid={interview._id} />
           </div>
 
           <CardTitle className="text-3xl">{interview.title}</CardTitle>
@@ -142,7 +144,7 @@ export default function InterviewDetails() {
               </AvatarFallback>
             </Avatar>
             <span className="text-muted-foreground">
-              Author ID: {interview.author}
+                  Author: {interview.author?.name} 
             </span>
           </div>
         </CardHeader>
