@@ -27,28 +27,18 @@
 //   const filterAndSearch = (filters, query) => {
 //     let results = [...interviews];
 
-//     // Apply filters
 //     if (filters.company) {
 //       results = results.filter(i => {
-//         console.log('Filtering by company:', filters.company); // Debug log
-//         console.log('Interview company:', i?.companyId); // Debug log
-        
-//         // Check by company ID (string comparison)
 //         if (i?.company?.id && i.company.id.toString() === filters.company.toString()) return true;
-//         // Check by company name (case-insensitive)
 //         if (i?.company?.name && i.company.name.toLowerCase() === filters.company.toLowerCase()) return true;
-//         // Check if company is a string field directly
 //         if (typeof i?.company === 'string' && i.company.toLowerCase() === filters.company.toLowerCase()) return true;
-        
 //         return false;
 //       });
 //     }
 
 //     if (filters.role) {
 //       results = results.filter(i => {
-//         // Check by role ID
 //         if (i?.role?.id === filters.role) return true;
-//         // Check by role name (case-insensitive)
 //         if (i?.role?.name?.toLowerCase() === filters.role.toLowerCase()) return true;
 //         return false;
 //       });
@@ -64,7 +54,6 @@
 //       );
 //     }
 
-//     // Apply search query
 //     if (query) {
 //       const lowerQuery = query.toLowerCase();
 //       results = results.filter(i =>
@@ -88,6 +77,8 @@
 //     filterAndSearch(filters, query);
 //   };
 
+  
+
 //   return (
 //     <div>
 //       <div className="mb-8">
@@ -106,7 +97,12 @@
 //       {filteredInterviews.length > 0 ? (
 //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 //           {filteredInterviews.map(interview => (
-//             <InterviewCard key={interview._id} interview={interview} />
+//             <InterviewCard
+//               key={interview._id}
+//               interview={interview}
+//               onDelete={() => handleDelete(interview._id)}
+//               onEdit={() => handleEdit(interview._id)}
+//             />
 //           ))}
 //         </div>
 //       ) : (
@@ -151,40 +147,50 @@ const Interviews = () => {
   const filterAndSearch = (filters, query) => {
     let results = [...interviews];
 
+    // Company filter
     if (filters.company) {
-      results = results.filter(i => {
-        if (i?.company?.id && i.company.id.toString() === filters.company.toString()) return true;
-        if (i?.company?.name && i.company.name.toLowerCase() === filters.company.toLowerCase()) return true;
-        if (typeof i?.company === 'string' && i.company.toLowerCase() === filters.company.toLowerCase()) return true;
-        return false;
+      results = results.filter(interview => {
+        // Match against companyId (which is what InterviewShow component uses)
+        return interview.companyId === filters.company;
       });
     }
 
+    // Role filter
     if (filters.role) {
-      results = results.filter(i => {
-        if (i?.role?.id === filters.role) return true;
-        if (i?.role?.name?.toLowerCase() === filters.role.toLowerCase()) return true;
-        return false;
+      results = results.filter(interview => {
+        // Match against roleId (which is what InterviewShow component uses)
+        return interview.roleId === filters.role;
       });
     }
 
+    // Difficulty filter
     if (filters.difficulty) {
-      results = results.filter(i => i?.difficultyLevel === filters.difficulty);
-    }
-
-    if (filters.tags && filters.tags.length > 0) {
-      results = results.filter(i =>
-        i?.tags && i.tags.some(tag => filters.tags.includes(tag.id))
+      results = results.filter(interview => 
+        interview.difficultyLevel === filters.difficulty
       );
     }
 
+    // Tags filter
+    if (filters.tags && filters.tags.length > 0) {
+      results = results.filter(interview => {
+        // Check if interview has tags and if any match the filter tags
+        return interview.tags && interview.tags.some(tag => 
+          // Handle both tag objects with id property and tag strings
+          (typeof tag === 'object' && tag.id) 
+            ? filters.tags.includes(tag.id)
+            : filters.tags.includes(tag)
+        );
+      });
+    }
+
+    // Search query
     if (query) {
       const lowerQuery = query.toLowerCase();
-      results = results.filter(i =>
-        i?.title?.toLowerCase().includes(lowerQuery) ||
-        i?.content?.toLowerCase().includes(lowerQuery) ||
-        i?.companyId?.toLowerCase().includes(lowerQuery) ||
-        i?.role?.name?.toLowerCase().includes(lowerQuery)
+      results = results.filter(interview =>
+        (interview.title && interview.title.toLowerCase().includes(lowerQuery)) ||
+        (interview.content && interview.content.toLowerCase().includes(lowerQuery)) ||
+        (interview.companyId && interview.companyId.toLowerCase().includes(lowerQuery)) ||
+        (interview.roleId && interview.roleId.toLowerCase().includes(lowerQuery))
       );
     }
 
@@ -201,7 +207,17 @@ const Interviews = () => {
     filterAndSearch(filters, query);
   };
 
-  
+  // Note: handleDelete and handleEdit are not defined in your original code
+  // Adding stub functions to avoid errors
+  const handleDelete = (id) => {
+    console.log(`Delete interview with id ${id}`);
+    // Implement delete functionality here
+  };
+
+  const handleEdit = (id) => {
+    console.log(`Edit interview with id ${id}`);
+    // Implement edit functionality here
+  };
 
   return (
     <div>

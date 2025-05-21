@@ -105,7 +105,7 @@ const Footer = () => {
               </li>
               <li>
                 <NavLink
-                  to="/interviews"
+                  to="/interview"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   Interview Blogs
