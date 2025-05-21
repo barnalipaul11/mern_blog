@@ -53,11 +53,21 @@ export const getOpportunities = async (req, res) => {
 // };
 
 // // Delete
-// export const deleteOpportunity = async (req, res) => {
-//   try {
-//     await Opportunity.findByIdAndDelete(req.params.id);
-//     res.json({ message: "Opportunity deleted" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+
+export const deleteOpportunity = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const deletedOpportunity = await Opportunity.findByIdAndDelete(id)
+
+    if (!deletedOpportunity) {
+      return res.status(404).json({ message: "Opportunity not found" })
+    }
+
+    res.status(200).json({ message: "Opportunity deleted successfully" })
+  } catch (error) {
+    console.error("Delete Error:", error)
+    res.status(500).json({ message: "Server error while deleting opportunity" })
+  }
+}
+

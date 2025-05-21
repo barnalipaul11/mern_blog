@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEnv } from '@/helpers/getEnv';
 import { showToast } from '@/helpers/showToast';
 import { removeUser, setUser } from '@/redux/user/user.slice';
-
+import { ModeToggle } from '../Modetoggler';
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
@@ -17,14 +17,14 @@ const navItems = [
   { to: '/opportunities', label: 'Opportunities', icon: Briefcase },
   { to: '/blog/add', label: 'Share Your Story', icon: PenSquare },
   { to: '/blog', label: 'Dashboard', icon: User },
-  { to: '/about-us', label: 'About Us', icon: Info },
+  { to: '/about', label: 'About Us', icon: Info },
 ];
 
 const navItems2 = [
   { to: '/', label: 'Home', icon: Home },
-  { to: '/blogs', label: 'Interview Experiences', icon: BookOpen },
-  { to: '/jobs', label: 'Opportunities', icon: Briefcase },
-  { to: '/about-us', label: 'About Us', icon: Info },
+  { to: '/interview', label: 'Interview Experiences', icon: BookOpen },
+  { to: '/opportunities', label: 'Opportunities', icon: Briefcase },
+  { to: '/about', label: 'About Us', icon: Info },
 ];
 
 function Navbar() {
@@ -86,7 +86,7 @@ function Navbar() {
               </NavLink>
               ))}
 
-          
+            <ModeToggle/>
 
             {!user.isLoggedIn ? (
               <Link to={RouteSignIn}>
@@ -104,7 +104,6 @@ function Navbar() {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-background border border-border rounded-md shadow-lg z-10">
                     <Link to="/profile" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm hover:bg-accent">Profile</Link>
-                    <Link to="/settings" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm hover:bg-accent">Settings</Link>
                     <Link to="/my-posts" onClick={() => setDropdownOpen(false)} className="block px-4 py-2 text-sm hover:bg-accent">My Posts</Link>
                     <button
                       onClick={() => {

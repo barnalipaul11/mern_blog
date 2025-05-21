@@ -11,6 +11,8 @@ import InterviewCard from "@/components/shared/InterviewCard";
 import OpportunityCard from "@/components/shared/OpportunityCard";
 import Loading from "@/components/Loading";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const BlogDetails = () => {
   const user = useSelector((state) => state.user);
@@ -101,7 +103,21 @@ const handleDelete = async (id) => {
     console.error('Error deleting interview:', err);
   }
 };
+const handleDeleteOp = async (id) => {
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/opportunity/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
 
+    if (!res.ok) throw new Error('Failed to delete opportunity');
+
+    const updatedOpportunities = opportunities.filter(opportunity => opportunity._id !== id);
+    setOpportunities(updatedOpportunities);
+  } catch (err) {
+    console.error('Error deleting opportunity:', err);
+  }
+};
 
   // Edit interview handler placeholder
   const handleEdit = (id) => {
@@ -149,8 +165,9 @@ const handleDelete = async (id) => {
             <p className="text-sm text-[#FF6F7A] mt-1">{userData.user.email}</p>
           </CardHeader>
           <CardContent className="pt-6 px-8">
-            <p className="text-sm text-[#FF8A9C] mb-6 italic">{userData.user.bio}</p>
+            <p className="text-sm text-white mb-6 italic">{userData.user.bio}</p>
             <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
+            <Link to="/profile">
               <Button
                 variant="outline"
                 className="w-full flex items-center justify-center gap-3 font-semibold text-[#E6253F] border-[#E6253F] hover:bg-[#FF4D5A] hover:text-white transition-colors"
@@ -158,13 +175,17 @@ const handleDelete = async (id) => {
                 <User size={18} className="text-[#E6253F]" />
                 Edit Profile
               </Button>
-              <Button
+            </Link>
+            <Link to="/blog/add">
+                <Button
                 variant="default"
                 className="w-full flex items-center justify-center gap-3 font-semibold bg-[#E6253F] hover:bg-[#FF4D5A]"
               >
                 <PenSquare size={18} />
                 Create New Post
               </Button>
+            </Link>
+              
             </div>
           </CardContent>
         </Card>
@@ -205,7 +226,10 @@ const handleDelete = async (id) => {
                   <p className="text-muted-foreground mb-4">
                     Share your experiences to help others
                   </p>
-                  <Button>Share Interview Experience</Button>
+                  <Link to="/blog/add">
+                      <Button>Share Interview Experience</Button>
+                  </Link>
+                
                 </div>
               )}
             </TabsContent>
@@ -221,6 +245,7 @@ const handleDelete = async (id) => {
                     <OpportunityCard
                       key={opportunity._id}
                       opportunity={opportunity}
+                      onDelete={handleDeleteOp}
                     />
                   ))}
                 </div>
@@ -232,7 +257,10 @@ const handleDelete = async (id) => {
                   <p className="text-muted-foreground mb-4">
                     Share job opportunities to help others
                   </p>
-                  <Button>Post a Job Opportunity</Button>
+                  <Link to="/blog/add">
+                      <Button>Post a Job Opportunity</Button>
+                  </Link>
+                 
                 </div>
               )}
             </TabsContent>

@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "@/components/themeprovider";
 import {
   Card,
   CardContent,
@@ -43,6 +44,7 @@ const getDifficultyColor = (level) => {
 };
 
 const InterviewCard = ({ interview, onEdit, onDelete }) => {
+ 
   // Using _id as id, and destructure other fields
   const {
     _id: id,
@@ -71,13 +73,20 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
   const difficultyColor = getDifficultyColor(difficultyLevel);
 
   return (
-    <Card className="relative bg-black text-white card-glow h-full flex flex-col transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-amber-500/10 hover:bg-gradient-to-br hover:from-black hover:to-[#0f0f0f]">
-      <CardHeader className="pb-2 pt-3 px-4">
+   
+
+    <Card className="relative h-full flex flex-col transition-all duration-300 transform hover:scale-[1.02] 
+  hover:shadow-2xl hover:shadow-[#e11d48]/30 
+  bg-gray-200 text-black hover:bg-gray-50 
+  dark:bg-black dark:text-white dark:hover:bg-gradient-to-br dark:hover:from-black dark:hover:to-[#0f0f0f]"
+  >
+
+      <CardHeader className="pb-2 pt-3">
         <div className="flex justify-between items-start">
           <div>
             <Badge
               variant="outline"
-              className="mb-2 border-primary/40 bg-primary/5"
+              className="mb-2 border-primary/40 bg-primary/5 dark:border-primary/20 dark:bg-primary/10"
             >
               {companies[companyId] ?? companyId ?? "Unknown Company"}
             </Badge>
@@ -96,7 +105,7 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
         </div>
       </CardHeader>
 
-      <CardContent className="pb-0 px-2">
+      <CardContent className="pb-2">
         <div className="flex items-center text-sm text-muted-foreground mb-2">
           <Star className="h-4 w-4 mr-1" />
           <span>{roles[roleId] ?? roleId ?? "Unknown Role"}</span>
@@ -107,7 +116,7 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
         </div>
       </CardContent>
 
-      <CardFooter className="mt-auto pt-3 px-4 pb-3 flex items-center justify-between border-t border-border">
+      <CardFooter className="mt-auto pt-3 px-4 pb-3 flex items-center justify-between border-t border-border dark:border-gray-700">
         <div className="flex items-center gap-2">
           <Avatar className="h-6 w-6">
             {author?.avatar ? (
@@ -143,14 +152,20 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
             )}
           </div>
 
-          <Button
-            size="icon"
-            variant="ghost"
-            className="h-7 w-7"
-            onClick={() => onEdit?.(id)}
-          >
-            <Pencil size={14} />
-          </Button>
+          <div className="relative group">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="h-7 w-7"
+              onClick={() => onEdit?.(id)}
+            >
+              <Pencil size={14} />
+            </Button>
+            <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-black dark:bg-white px-2 py-1 text-xs text-white dark:text-black opacity-0 group-hover:opacity-100 transition-opacity">
+              Coming Soon
+            </span>
+          </div>
+
           <Button
             size="icon"
             variant="ghost"
@@ -162,6 +177,7 @@ const InterviewCard = ({ interview, onEdit, onDelete }) => {
         </div>
       </CardFooter>
     </Card>
+    
   );
 };
 

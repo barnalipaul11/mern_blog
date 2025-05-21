@@ -25,7 +25,7 @@ const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center animate-fadeIn"
           style={{ animationDelay: '0.4s' }}
         >
-          <Link to="/interviews">
+          <Link to="/interview">
             <Button size="lg" className="gap-2">
               Browse Interviews
               <ArrowRight size={16} />

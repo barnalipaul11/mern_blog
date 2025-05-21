@@ -105,7 +105,7 @@ const Profile = () => {
 
   if(loading) return  <Loading/>  
   return (
-    <Card className='max-w-screen-md mx-auto'>
+    <Card className='max-w-screen-md mx-auto  hover:shadow-xl hover:shadow-[#e11d48]/30 '>
        
         <CardContent>
             <div className="flex justify-center items-center mt-10">

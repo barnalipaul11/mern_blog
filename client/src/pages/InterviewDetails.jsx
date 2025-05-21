@@ -37,7 +37,6 @@ export default function InterviewDetails() {
         return res.json();
       })
       .then(data => {
-        console.log("Fetched interview data:", data);
         setInterview(data);
         setIsLoading(false);
       })
@@ -45,7 +44,6 @@ export default function InterviewDetails() {
         console.error("Failed to fetch interview:", err)
         // For demonstration purposes, use the demo data if API fails
         // Remove this in production
-        setInterview(demoInterview);
         setIsLoading(false);
       })
   }, [id])
@@ -151,10 +149,10 @@ export default function InterviewDetails() {
 
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-primary/5 rounded-lg">
-            <div>
+            {/* <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-1">Interview ID</h3>
               <p className="text-sm font-mono">{interview._id || id}</p>
-            </div>
+            </div> */}
             <div>
               <h3 className="text-sm font-medium text-muted-foreground mb-1">Company</h3>
               <p className="capitalize">{interview.companyId}</p>

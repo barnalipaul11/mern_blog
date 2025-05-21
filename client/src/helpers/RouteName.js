@@ -18,3 +18,5 @@ export const RouteBlogEdit=(blogid)=>{
 export const RouteOpportunity = '/opportunities'
 export const RouteInternship = '/interview'
 
+export const RouteAbout ='/about'
+
