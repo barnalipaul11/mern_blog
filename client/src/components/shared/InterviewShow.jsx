@@ -56,25 +56,25 @@ const InterviewShow = ({ interview }) => {
 >
 
         <CardHeader className="pb-3 pt-0">
-          <div className="flex justify-between items-start">
-            <div>
-              <Badge
-                variant="outline"
-                className="mb-2 border-primary/40 bg-primary/5"
-              >
-                {companyId || "Unknown Company"}
+          <Badge
+            variant="outline"
+            className="mb-2 border-primary/40 bg-primary/5 w-fit"
+          >
+            {companyId || "Unknown Company"}
+          </Badge>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-lg font-semibold leading-tight hover:text-primary transition-colors duration-200 break-words">
+              {title || "Untitled Interview"}
+            </h3>
+            {difficultyLevel && (
+              <Badge variant="outline" className={`w-fit ${difficultyColor}`}>
+                {difficultyLevel.charAt(0).toUpperCase() + difficultyLevel.slice(1)}
               </Badge>
-              <h3 className="text-lg font-semibold leading-tight hover:text-primary transition-colors duration-200">
-                {title || "Untitled Interview"}
-              </h3>
-            </div>
-            <Badge variant="outline" className={`${difficultyColor}`}>
-              {difficultyLevel
-                ? difficultyLevel.charAt(0).toUpperCase() + difficultyLevel.slice(1)
-                : "N/A"}
-            </Badge>
+            )}
           </div>
         </CardHeader>
+
         <CardContent className="pb-2">
           <div className="flex items-center text-sm text-muted-foreground mb-2">
             <Star className="h-4 w-4 mr-1" />
