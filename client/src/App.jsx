@@ -1,7 +1,7 @@
 // src/App.jsx
 import { ThemeProvider } from "./components/themeprovider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "../src/components/layout/Layout";
+import Layout from "../src/components/Layout/Layout";
 
 import { RouteAbout, RouteBlog, RouteBlogAdd,RouteBlogEdit,RouteIndex, RouteInternship, RouteOpportunity, RouteProfile, RouteSignIn, RouteSignUp } from "./helpers/RouteName";
 import SignIn from "./pages/Signin";
