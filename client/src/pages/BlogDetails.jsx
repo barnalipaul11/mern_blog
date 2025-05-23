@@ -135,15 +135,16 @@ const handleDeleteOp = async (id) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Profile card */}
-     <div className="col-span-1">
+     <div className="col-span-1 ">
         <Card
           className="
-            shadow-lg rounded-2xl border border-[#E6253F]
-            h-[500px] flex flex-col items-center justify-center text-center
-            transition-transform duration-300 ease-in-out
-            hover:shadow-2xl hover:border-[#FF4D5A] hover:-translate-y-1
-            bg-black
-            text-white
+           relative h-[500px] flex flex-col items-center justify-center text-center
+  transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 
+  hover:shadow-2xl hover:shadow-[#e11d48]/30 
+  bg-rose-100 text-black hover:bg-gray-50 
+  dark:bg-black dark:text-white dark:hover:bg-gradient-to-br dark:hover:from-black dark:hover:to-[#0f0f0f]
+  shadow-lg rounded-2xl border border-[#E6253F] 
+  hover:border-[#FF4D5A]
           "
         >
           <CardHeader className="flex flex-col items-center">

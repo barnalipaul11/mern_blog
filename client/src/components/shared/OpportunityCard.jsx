@@ -42,7 +42,7 @@ const OpportunityCard = ({ opportunity, onDelete }) => {
   return (
     <Card className="relative h-full flex flex-col transition-all duration-300 transform hover:scale-[1.02] 
   hover:shadow-2xl hover:shadow-[#e11d48]/30 
-  bg-gray-200 text-black hover:bg-gray-50 
+  bg-rose-100 text-black hover:bg-gray-50 
   dark:bg-black dark:text-white dark:hover:bg-gradient-to-br dark:hover:from-black dark:hover:to-[#0f0f0f]"
 >
       <CardHeader className="pb-3 pt-1 ">

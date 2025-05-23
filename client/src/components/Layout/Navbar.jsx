@@ -67,7 +67,7 @@ function Navbar() {
         <div className="flex justify-between items-center">
           <NavLink to="/" className="flex items-center space-x-2 text-foreground">
             <span className="text-xl font-bold tracking-tight text-primary">
-              CareerConnect
+              CareersConnect
             </span>
           </NavLink>
 

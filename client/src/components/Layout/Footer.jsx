@@ -83,7 +83,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-semibold text-xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-              CareerConnect
+              CareersConnect
             </h3>
             <p className="text-muted-foreground text-sm max-w-xs">
               A platform for students and early professionals to share interview
@@ -170,7 +170,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border mt-8 pt-6 text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} CareerConnect. All rights reserved.</p>
+          <p>&copy; {currentYear} CareersConnect. All rights reserved.</p>
         </div>
       </div>
     </footer>
