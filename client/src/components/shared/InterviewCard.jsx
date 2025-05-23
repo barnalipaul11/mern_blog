@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 
 // Optional mappings for better display names
-const companies = {
+export const companies = {
   google: "Google",
   amazon: "Amazon",
   // add other company mappings here

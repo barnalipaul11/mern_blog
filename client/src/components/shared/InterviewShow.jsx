@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { format, isValid } from "date-fns"
 import { Calendar, Star } from "lucide-react"
 import { Link } from "react-router-dom"
+import { companies } from "./InterviewCard"
 
 const getDifficultyColor = level => {
   switch (level) {
@@ -55,25 +56,30 @@ const InterviewShow = ({ interview }) => {
   dark:bg-black dark:text-white dark:hover:bg-gradient-to-br dark:hover:from-black dark:hover:to-[#0f0f0f]"
 >
 
-        <CardHeader className="pb-3 pt-0">
-          <Badge
-            variant="outline"
-            className="mb-2 border-primary/40 bg-primary/5 w-fit"
-          >
-            {companyId || "Unknown Company"}
-          </Badge>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-lg font-semibold leading-tight hover:text-primary transition-colors duration-200 break-words">
-              {title || "Untitled Interview"}
+         <CardHeader className="pb-2 pt-3">
+        <div className="flex justify-between items-start">
+          <div>
+            <Badge
+              variant="outline"
+              className="mb-2 border-primary/40 bg-primary/5 dark:border-primary/20 dark:bg-primary/10"
+            >
+              {companies[companyId] ?? companyId ?? "Unknown Company"}
+            </Badge>
+            <h3
+              onClick={() => navigate(`/interviews/${id}`)}
+              className="text-lg font-semibold leading-tight hover:text-primary transition-colors duration-200 cursor-pointer"
+            >
+              {title ?? "Untitled Interview"}
             </h3>
-            {difficultyLevel && (
-              <Badge variant="outline" className={`w-fit ${difficultyColor}`}>
-                {difficultyLevel.charAt(0).toUpperCase() + difficultyLevel.slice(1)}
-              </Badge>
-            )}
           </div>
-        </CardHeader>
+          <Badge variant="outline" className={`${difficultyColor}`}>
+            {difficultyLevel
+              ? difficultyLevel.charAt(0).toUpperCase() + difficultyLevel.slice(1)
+              : "Unknown"}
+          </Badge>
+        </div>
+      </CardHeader>
+
 
         <CardContent className="pb-2">
           <div className="flex items-center text-sm text-muted-foreground mb-2">

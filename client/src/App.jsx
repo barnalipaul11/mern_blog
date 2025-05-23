@@ -16,6 +16,7 @@ import Interviews from "./pages/Interview";
 import InterviewDetails from "./pages/InterviewDetails";
 import About from "./pages/About";
 import ScrollToTop from "@/components/Layout/ScrollTop"
+import AuthRouteProtection from "./components/AuthRouteProtection";
 
 const App = () => (
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -24,15 +25,22 @@ const App = () => (
       <Routes>
         <Route element={<Layout />}>
           <Route path={RouteIndex} element={<Index />} />
-          <Route path={RouteProfile} element={<Profile />} />
+         
           
-          <Route path={RouteBlogAdd} element={<Addblog />} />
-          <Route path={RouteBlog} element={<BlogDetails/>} />
+         
+          
           <Route path={RouteBlogEdit()} element={<EditBlog/>} />
           <Route path={RouteOpportunity} element={<Opportunities/>} />
           <Route path={RouteInternship} element={<Interviews/>} />
-           <Route path="/interviews/:id" element={<InterviewDetails />} />
+         
           <Route path= {RouteAbout} element={<About/>}/>
+
+          <Route element={<AuthRouteProtection/>}>
+               <Route path={RouteProfile} element={<Profile />} />
+                <Route path={RouteBlogAdd} element={<Addblog />} />
+                <Route path={RouteBlog} element={<BlogDetails/>} />
+                  <Route path="/interviews/:id" element={<InterviewDetails />} />
+          </Route>
         </Route>
 
         <Route path={RouteSignIn} element={<SignIn/>}/>

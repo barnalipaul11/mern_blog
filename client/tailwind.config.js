@@ -59,7 +59,21 @@ export default {
 		fontFamily: {
 			inter: ['Inter', 'sans-serif'],
 		},
-  	}
+		animation: {
+		     float: 'float 6s ease-in-out infinite',
+			'float-fast': 'float-fast 3s ease-in-out infinite',
+			},
+			keyframes: {
+				float: {
+				'0%, 100%': { transform: 'translateY(0)' },
+				'50%': { transform: 'translateY(-15px)' },
+				},
+				'float-fast': { // Add this block
+				'0%, 100%': { transform: 'translateY(0)' },
+				'50%': { transform: 'translateY(-15px)' },
+  				},
+			},
+				}
   },
   plugins: [tailwindcssanimate],
 }
