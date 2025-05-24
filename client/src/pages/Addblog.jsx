@@ -38,7 +38,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { showToast } from "@/helpers/showToast";
 import { getEnv } from "@/helpers/getEnv";
 import { useSelector } from "react-redux";
-import { RouteBlogAdd } from "@/helpers/RouteName";
+import { RouteBlogAdd, RouteIndex } from "@/helpers/RouteName";
 
 // Mock data
 const companyOptions = [
@@ -347,7 +347,7 @@ async function onInterviewSubmit(values) {
     }
 
     interviewForm.reset();
-    navigate(RouteBlogAdd);
+    navigate(RouteIndex);
     showToast("success", data.message);
   } catch (error) {
     showToast("error", error.message);
@@ -492,7 +492,7 @@ async function onInterviewSubmit(values) {
                             date > new Date() || date < new Date("2000-01-01")
                           }
                           initialFocus
-                          className="pointer-events-auto"
+                          className="pointer-events-auto "
                         />
                       </PopoverContent>
                     </Popover>

@@ -6,7 +6,7 @@ import Layout from "../src/components/Layout/Layout";
 import { RouteAbout, RouteBlog, RouteBlogAdd,RouteBlogEdit,RouteIndex, RouteInternship, RouteOpportunity, RouteProfile, RouteSignIn, RouteSignUp } from "./helpers/RouteName";
 import SignIn from "./pages/Signin";
 import SignUp from "./pages/Signup";
-import Index from "./pages";
+import Index from "./pages/Index";
 import Profile from "./pages/Profile"
 import Addblog from "./pages/Addblog"
 import BlogDetails from "./pages/BlogDetails";
